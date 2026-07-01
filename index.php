@@ -66,91 +66,98 @@ $cuias = [
         <div class="row g-4">
             <?php foreach ($cuias as $cuia): ?>
             <div class="col-md-3">
-                <div class="card h-100 shadow-sm">
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title"><?php echo $cuia['nome']; ?></h5>
-                        <p class="card-text flex-grow-1"><?php echo $cuia['descricao']; ?></p>
-                        <p class="fw-bold text-primary"><?php echo $cuia['preco']; ?></p>
-                        <button class="btn btn-outline-dark mt-auto select-cuia" data-id="<?php echo $cuia['id']; ?>" data-nome="<?php echo $cuia['nome']; ?>">Selecionar</button>
+                <div class="card h-100 shadow-sm border-0">
+                    <div class="card-body d-flex flex-column text-center">
+                        <div class="mb-3 p-4 bg-light rounded">
+                             <i class="bi bi-cup-hot" style="font-size: 2rem;"></i>
+                             <!-- Placeholder para imagem futura -->
+                             <div class="text-muted small">Imagem da Cuia</div>
+                        </div>
+                        <h5 class="card-title fw-bold"><?php echo $cuia['nome']; ?></h5>
+                        <p class="card-text flex-grow-1 text-muted small"><?php echo $cuia['descricao']; ?></p>
+                        <p class="fw-bold text-primary mb-3"><?php echo $cuia['preco']; ?></p>
+                        <button class="btn btn-dark w-100 select-cuia" 
+                                data-bs-toggle="modal" 
+                                data-bs-target="#modalPedido"
+                                data-id="<?php echo $cuia['id']; ?>" 
+                                data-nome="<?php echo $cuia['nome']; ?>">
+                            Selecionar e Personalizar
+                        </button>
                     </div>
                 </div>
             </div>
             <?php endforeach; ?>
         </div>
     </section>
-
-    <hr class="my-5">
-
-    <section id="solicitacao" class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card shadow">
-                <div class="card-header bg-dark text-white">
-                    <h3 class="mb-0 h5">Solicitar Gravação</h3>
-                </div>
-                <div class="card-body">
-                    <form action="processar.php" method="POST" enctype="multipart/form-data">
-                        <div class="mb-3">
-                            <label for="cuia_selecionada" class="form-label">Item Selecionado</label>
-                            <input type="text" class="form-control" id="cuia_selecionada_nome" readonly value="Nenhum item selecionado">
-                            <input type="hidden" name="cuia_id" id="cuia_id" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="nome" class="form-label">Seu Nome</label>
-                            <input type="text" class="form-control" name="nome" id="nome" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="whatsapp" class="form-label">WhatsApp</label>
-                            <input type="tel" class="form-control" name="whatsapp" id="whatsapp" placeholder="(00) 00000-0000" required>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="imagem_referencia" class="form-label">Imagem da Arte (Logo, Nome, Desenho)</label>
-                            <input type="file" class="form-control" name="imagem_referencia" id="imagem_referencia" accept="image/*" required>
-                            <div class="form-text">Envie a imagem que você deseja gravar na cuia.</div>
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="observacoes" class="form-label">Observações / Detalhes da Gravação</label>
-                            <textarea class="form-control" name="observacoes" id="observacoes" rows="3" placeholder="Ex: Gravar o nome 'João' abaixo do logo."></textarea>
-                        </div>
-
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-primary btn-lg">Enviar Pedido</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
+
+<!-- Modal de Pedido -->
+<div class="modal fade" id="modalPedido" tabindex="-1" aria-labelledby="modalPedidoLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header bg-dark text-white">
+                <h5 class="modal-title" id="modalPedidoLabel">Solicitar Gravação</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="processar.php" method="POST" enctype="multipart/form-data">
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold">Item Escolhido:</label>
+                        <input type="text" class="form-control bg-light" id="cuia_selecionada_nome" readonly>
+                        <input type="hidden" name="cuia_id" id="cuia_id" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nome" class="form-label">Seu Nome</label>
+                        <input type="text" class="form-control" name="nome" id="nome" placeholder="Como podemos te chamar?" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="whatsapp" class="form-label">WhatsApp</label>
+                        <input type="tel" class="form-control" name="whatsapp" id="whatsapp" placeholder="(00) 00000-0000" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="imagem_referencia" class="form-label">Imagem da Arte (Logo, Nome, Desenho)</label>
+                        <input type="file" class="form-control" name="imagem_referencia" id="imagem_referencia" accept="image/*" required>
+                        <div class="form-text">Envie a imagem que deseja gravar.</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="observacoes" class="form-label">Observações</label>
+                        <textarea class="form-control" name="observacoes" id="observacoes" rows="3" placeholder="Detalhes sobre a posição, nomes extras, etc."></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Enviar Pedido</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
 <footer class="bg-dark text-white py-4 mt-5">
     <div class="container text-center">
+        <img src="assets/img/logo.png" alt="C2F Logo" height="40" class="mb-3 bg-white rounded-circle p-1">
         <p class="mb-0">&copy; <?php echo date('Y'); ?> C2F Maker - Todos os direitos reservados.</p>
-        <small>Desenvolvido para facilitar sua personalização.</small>
+        <small class="text-muted">Engenharia Elétrica & Personalização 3D/Laser</small>
     </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    document.querySelectorAll('.select-cuia').forEach(button => {
-        button.addEventListener('click', function() {
-            const id = this.getAttribute('data-id');
-            const nome = this.getAttribute('data-nome');
-            
-            document.getElementById('cuia_id').value = id;
-            document.getElementById('cuia_selecionada_nome').value = nome;
-            
-            // Scroll suave até o formulário
-            document.getElementById('solicitacao').scrollIntoView({ behavior: 'smooth' });
-            
-            // Destacar o campo
-            const inputNome = document.getElementById('cuia_selecionada_nome');
-            inputNome.classList.add('is-valid');
-            setTimeout(() => inputNome.classList.remove('is-valid'), 2000);
-        });
+    const modalPedido = document.getElementById('modalPedido');
+    modalPedido.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        const id = button.getAttribute('data-id');
+        const nome = button.getAttribute('data-nome');
+        
+        const inputId = modalPedido.querySelector('#cuia_id');
+        const inputNome = modalPedido.querySelector('#cuia_selecionada_nome');
+        
+        inputId.value = id;
+        inputNome.value = nome;
     });
 </script>
 </body>

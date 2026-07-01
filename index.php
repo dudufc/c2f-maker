@@ -8,25 +8,29 @@ $cuias = [
         'id' => 'bago_touro',
         'nome' => 'Bago de Touro',
         'descricao' => 'Cuia tradicional com formato arredondado e base natural.',
-        'preco' => 'R$ 45,00'
+        'preco' => 'R$ 45,00',
+        'imagem' => 'assets/img/bago_touro.jpg'
     ],
     [
         'id' => 'porongo_pe',
         'nome' => 'Porongo com Pé',
         'descricao' => 'Cuia clássica com suporte (pé) para maior estabilidade.',
-        'preco' => 'R$ 55,00'
+        'preco' => 'R$ 55,00',
+        'imagem' => 'assets/img/porongo_pe.jpg'
     ],
     [
         'id' => 'coquinho',
         'nome' => 'Coquinho',
         'descricao' => 'Cuia pequena, ideal para um mate rápido ou individual.',
-        'preco' => 'R$ 35,00'
+        'preco' => 'R$ 35,00',
+        'imagem' => 'assets/img/coquinho.jpg'
     ],
     [
         'id' => 'propria_cuia',
         'nome' => 'Trazer minha própria cuia',
         'descricao' => 'Solicite apenas o serviço de gravação a laser na sua cuia.',
-        'preco' => 'Sob consulta'
+        'preco' => 'Sob consulta',
+        'imagem' => 'assets/img/propria_cuia.png'
     ]
 ];
 ?>
@@ -39,6 +43,22 @@ $cuias = [
     <title><?php echo $page_title; ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        .cuia-img-container {
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        .cuia-img-container img {
+            max-height: 100%;
+            max-width: 100%;
+            object-fit: contain;
+        }
+    </style>
 </head>
 <body>
 
@@ -68,10 +88,8 @@ $cuias = [
             <div class="col-md-3">
                 <div class="card h-100 shadow-sm border-0">
                     <div class="card-body d-flex flex-column text-center">
-                        <div class="mb-3 p-4 bg-light rounded">
-                             <i class="bi bi-cup-hot" style="font-size: 2rem;"></i>
-                             <!-- Placeholder para imagem futura -->
-                             <div class="text-muted small">Imagem da Cuia</div>
+                        <div class="cuia-img-container mb-3">
+                             <img src="<?php echo $cuia['imagem']; ?>" alt="<?php echo $cuia['nome']; ?>">
                         </div>
                         <h5 class="card-title fw-bold"><?php echo $cuia['nome']; ?></h5>
                         <p class="card-text flex-grow-1 text-muted small"><?php echo $cuia['descricao']; ?></p>

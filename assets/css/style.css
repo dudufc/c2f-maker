@@ -1,0 +1,51 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+.navbar {
+    border-bottom: 3px solid #0056b3;
+}
+
+.navbar-brand img {
+    background-color: white;
+    border-radius: 50%;
+    padding: 2px;
+}
+
+header {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border-bottom: 1px solid #dee2e6;
+}
+
+.card {
+    transition: transform 0.2s;
+    border: none;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.btn-primary {
+    background-color: #0056b3;
+    border-color: #004a9b;
+}
+
+.btn-primary:hover {
+    background-color: #004a9b;
+    border-color: #003d80;
+}
+
+.btn-outline-dark:hover {
+    background-color: #212529;
+    color: white;
+}
+
+#solicitacao .card-header {
+    background-color: #212529;
+}
+
+footer {
+    border-top: 3px solid #0056b3;
+}

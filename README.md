@@ -12,33 +12,49 @@ Este é um projeto simples e intuitivo desenvolvido para facilitar a venda de cu
 
 ## 🛠️ Tecnologias Utilizadas
 
-- **PHP** (Lógica de processamento)
 - **HTML5 / CSS3** (Estrutura e Estilização)
 - **Bootstrap 5** (Framework de UI)
-- **JavaScript** (Interatividade básica)
+- **JavaScript** (Interatividade e integração com WhatsApp)
 
-## 💻 Como Rodar no Laragon
+## 💻 Como rodar localmente
 
-1. Certifique-se de que o Git está instalado no seu computador.
-2. Abra o terminal do Laragon.
-3. Navegue até a pasta `www`:
-   ```bash
-   cd C:\laragon\www
-   ```
-4. Clone este repositório:
+1. Clone este repositório:
    ```bash
    git clone https://github.com/dudufc/c2f-maker.git
    ```
-5. No Laragon, clique em **"Reload"** ou **"Stop"** e depois **"Start All"**.
-6. Acesse no seu navegador: `http://c2f-maker.test`
+2. Entre na pasta:
+   ```bash
+   cd c2f-maker
+   ```
+3. Abra `index.html` no navegador ou use um servidor local, por exemplo a extensão Live Server do VS Code.
+
+## ☁️ Publicação gratuita na Vercel
+
+1. Acesse [vercel.com](https://vercel.com) e entre com o GitHub.
+2. Clique em **Add New > Project** e importe `dudufc/c2f-maker`.
+3. Em **Framework Preset**, selecione **Other**.
+4. Não preencha comandos de build nem diretório de saída.
+5. Clique em **Deploy**.
+
+Cada novo push na branch `main` será publicado automaticamente.
+
+## 📱 Alterar o WhatsApp
+
+No arquivo `index.html`, localize `WHATSAPP_C2F` e substitua o número no formato internacional, somente com dígitos:
+
+```js
+const WHATSAPP_C2F = '5555999827869';
+```
+
+O prefixo `55` representa o Brasil. Depois dele vêm o DDD e o número.
 
 ## 📁 Estrutura de Pastas
 
 - `/assets/img`: Contém o logo e imagens do site.
 - `/assets/css`: Estilos personalizados.
-- `/uploads`: Pasta onde as imagens enviadas pelos clientes são armazenadas.
-- `index.php`: Página principal com o catálogo e formulário.
-- `processar.php`: Lógica de recebimento dos pedidos.
+- `index.html`: Página principal, catálogo e formulário.
+
+> Por segurança do navegador, a imagem selecionada não pode ser anexada automaticamente ao WhatsApp. O cliente recebe uma orientação na mensagem para anexá-la na conversa.
 
 ---
 Desenvolvido para **C2F Maker - 3D & Engenharia Elétrica**.

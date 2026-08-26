@@ -126,7 +126,7 @@
                     <div class="mb-3">
                         <label for="imagem_referencia" class="form-label"><i class="bi bi-image me-1"></i> Imagem da Arte (Logo, Nome, Desenho)</label>
                         <input type="file" class="form-control" name="imagem_referencia" id="imagem_referencia" accept="image/png,image/jpeg,image/webp,image/gif">
-                        <div class="form-text">A imagem será conferida aqui. Depois, anexe-a na conversa do WhatsApp.</div>
+                        <div class="form-text">A imagem será enviada e o link seguirá automaticamente no pedido.</div>
                         <div id="previewContainer" class="mt-2 d-none">
                             <img id="imagePreview" class="img-fluid rounded shadow-sm" style="max-height: 150px;" alt="Preview da imagem">
                         </div>
@@ -172,6 +172,9 @@
 <script>
 // Troque somente este número quando o WhatsApp da empresa mudar.
 const WHATSAPP_C2F = '5555999827869';
+const SUPABASE_URL = 'https://klhmcxoylpdyvjmdmygm.supabase.co';
+const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_eW82uQ4aIb-4piI2NNHbiA_YEX32jra';
+const SUPABASE_BUCKET = 'artes-pedidos';
 
 // ============ Montagem do Catálogo ============
 const catalogoProdutos = document.getElementById('catalogoProdutos');
@@ -275,7 +278,34 @@ modalPedido.addEventListener('show.bs.modal', function(event) {
 });
 
 // ============ Validação do Formulário ============
-formPedido.addEventListener('submit', function(e) {
+async function enviarImagem(file) {
+    const extensoes = {
+        'image/jpeg': 'jpg',
+        'image/png': 'png',
+        'image/webp': 'webp',
+        'image/gif': 'gif'
+    };
+    const extensao = extensoes[file.type];
+    const caminho = `pedidos/${Date.now()}-${crypto.randomUUID()}.${extensao}`;
+    const resposta = await fetch(`${SUPABASE_URL}/storage/v1/object/${SUPABASE_BUCKET}/${caminho}`, {
+        method: 'POST',
+        headers: {
+            apikey: SUPABASE_PUBLISHABLE_KEY,
+            Authorization: `Bearer ${SUPABASE_PUBLISHABLE_KEY}`,
+            'Content-Type': file.type,
+            'x-upsert': 'false'
+        },
+        body: file
+    });
+
+    if (!resposta.ok) {
+        throw new Error('Não foi possível enviar a imagem. Tente novamente.');
+    }
+
+    return `${SUPABASE_URL}/storage/v1/object/public/${SUPABASE_BUCKET}/${caminho}`;
+}
+
+formPedido.addEventListener('submit', async function(e) {
     e.preventDefault();
     formError.classList.add('d-none');
     
@@ -297,14 +327,27 @@ formPedido.addEventListener('submit', function(e) {
         formError.innerHTML += '</ul>';
         formError.classList.remove('d-none');
     } else {
-        const produto = document.getElementById('cuia_selecionada_nome').value;
-        const preco = document.getElementById('cuia_preco').value;
-        const observacoes = document.getElementById('observacoes').value.trim() || 'Nenhuma';
-        const avisoImagem = imagem
-            ? `\nImagem selecionada: ${imagem.name}. Vou anexá-la nesta conversa.`
-            : '\nAinda não selecionei uma imagem de referência.';
-        const mensagem = `Olá! Gostaria de solicitar uma gravação na C2F Maker.\n\nNome: ${nome}\nMeu WhatsApp: ${whatsapp}\nItem: ${produto}\nValor informado: ${preco}\nObservações: ${observacoes}${avisoImagem}`;
-        window.open(`https://wa.me/${WHATSAPP_C2F}?text=${encodeURIComponent(mensagem)}`, '_blank', 'noopener,noreferrer');
+        btnEnviar.disabled = true;
+        btnEnviar.querySelector('.btn-text').classList.add('d-none');
+        btnEnviar.querySelector('.btn-loading').classList.remove('d-none');
+
+        try {
+            const produto = document.getElementById('cuia_selecionada_nome').value;
+            const preco = document.getElementById('cuia_preco').value;
+            const observacoes = document.getElementById('observacoes').value.trim() || 'Nenhuma';
+            const imagemUrl = imagem ? await enviarImagem(imagem) : '';
+            const referencia = imagemUrl
+                ? `\nImagem de referência: ${imagemUrl}`
+                : '\nImagem de referência: não enviada.';
+            const mensagem = `Olá! Gostaria de solicitar uma gravação na C2F Maker.\n\nNome: ${nome}\nMeu WhatsApp: ${whatsapp}\nItem: ${produto}\nValor informado: ${preco}\nObservações: ${observacoes}${referencia}`;
+            window.location.href = `https://wa.me/${WHATSAPP_C2F}?text=${encodeURIComponent(mensagem)}`;
+        } catch (erro) {
+            formError.textContent = erro.message;
+            formError.classList.remove('d-none');
+            btnEnviar.disabled = false;
+            btnEnviar.querySelector('.btn-text').classList.remove('d-none');
+            btnEnviar.querySelector('.btn-loading').classList.add('d-none');
+        }
     }
 });
 

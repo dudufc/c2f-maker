@@ -1,46 +1,9 @@
-<?php
-// Configurações básicas
-$page_title = "C2F Maker - Gravação a Laser e Cuias";
-
-// Catálogo de cuias
-$cuias = [
-    [
-        'id' => 'bago_touro',
-        'nome' => 'Bago de Touro',
-        'descricao' => 'Cuia tradicional com formato arredondado e base natural.',
-        'preco' => 'R$ 45,00',
-        'imagem' => 'assets/img/bago_touro.jpg'
-    ],
-    [
-        'id' => 'porongo_pe',
-        'nome' => 'Porongo com Pé',
-        'descricao' => 'Cuia clássica com suporte (pé) para maior estabilidade.',
-        'preco' => 'R$ 55,00',
-        'imagem' => 'assets/img/porongo_pe.jpg'
-    ],
-    [
-        'id' => 'coquinho',
-        'nome' => 'Coquinho',
-        'descricao' => 'Cuia pequena, ideal para um mate rápido ou individual.',
-        'preco' => 'R$ 35,00',
-        'imagem' => 'assets/img/coquinho.jpg'
-    ],
-    [
-        'id' => 'propria_cuia',
-        'nome' => 'Trazer minha própria cuia',
-        'descricao' => 'Solicite apenas o serviço de gravação a laser na sua cuia.',
-        'preco' => 'Sob consulta',
-        'imagem' => 'assets/img/propria_cuia.png'
-    ]
-];
-?>
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?php echo htmlspecialchars($page_title); ?></title>
+    <title>C2F Maker - Gravação a Laser e Cuias</title>
     <meta name="description" content="C2F Maker - Serviços de gravação a laser personalizada em cuias. Escolha seu modelo e personalize!">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
@@ -119,28 +82,57 @@ $cuias = [
     <section id="catalogo" class="mb-5">
         <h2 class="text-center mb-4 fw-bold">Nosso Catálogo</h2>
         <div class="row g-4 justify-content-center">
-            <?php foreach ($cuias as $cuia): ?>
             <div class="col-md-6 col-lg-3">
                 <div class="card h-100 shadow-sm border-0 cuia-card">
                     <div class="cuia-img-container">
-                        <img src="<?php echo htmlspecialchars($cuia['imagem']); ?>" alt="<?php echo htmlspecialchars($cuia['nome']); ?>" loading="lazy">
+                        <img src="assets/img/bago_touro.jpg" alt="Cuia Bago de Touro" loading="lazy">
                     </div>
                     <div class="card-body d-flex flex-column text-center">
-                        <h5 class="card-title fw-bold"><?php echo htmlspecialchars($cuia['nome']); ?></h5>
-                        <p class="card-text flex-grow-1 text-muted small"><?php echo htmlspecialchars($cuia['descricao']); ?></p>
-                        <p class="fw-bold text-primary mb-3 fs-5"><?php echo htmlspecialchars($cuia['preco']); ?></p>
+                        <h5 class="card-title fw-bold">Bago de Touro</h5>
+                        <p class="card-text flex-grow-1 text-muted small">Cuia tradicional com formato arredondado e base natural.</p>
+                        <p class="fw-bold text-primary mb-3 fs-5">R$ 45,00</p>
                         <button class="btn btn-dark w-100 select-cuia" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#modalPedido"
-                                data-id="<?php echo htmlspecialchars($cuia['id']); ?>" 
-                                data-nome="<?php echo htmlspecialchars($cuia['nome']); ?>"
-                                data-preco="<?php echo htmlspecialchars($cuia['preco']); ?>">
+                                data-nome="Bago de Touro" data-preco="R$ 45,00">
                             <i class="bi bi-plus-circle me-1"></i> Selecionar e Personalizar
                         </button>
                     </div>
                 </div>
             </div>
-            <?php endforeach; ?>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm border-0 cuia-card">
+                    <div class="cuia-img-container"><img src="assets/img/porongo_pe.jpg" alt="Cuia Porongo com Pé" loading="lazy"></div>
+                    <div class="card-body d-flex flex-column text-center">
+                        <h5 class="card-title fw-bold">Porongo com Pé</h5>
+                        <p class="card-text flex-grow-1 text-muted small">Cuia clássica com suporte para maior estabilidade.</p>
+                        <p class="fw-bold text-primary mb-3 fs-5">R$ 55,00</p>
+                        <button class="btn btn-dark w-100 select-cuia" data-bs-toggle="modal" data-bs-target="#modalPedido" data-nome="Porongo com Pé" data-preco="R$ 55,00"><i class="bi bi-plus-circle me-1"></i> Selecionar e Personalizar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm border-0 cuia-card">
+                    <div class="cuia-img-container"><img src="assets/img/coquinho.jpg" alt="Cuia Coquinho" loading="lazy"></div>
+                    <div class="card-body d-flex flex-column text-center">
+                        <h5 class="card-title fw-bold">Coquinho</h5>
+                        <p class="card-text flex-grow-1 text-muted small">Cuia pequena, ideal para um mate rápido ou individual.</p>
+                        <p class="fw-bold text-primary mb-3 fs-5">R$ 35,00</p>
+                        <button class="btn btn-dark w-100 select-cuia" data-bs-toggle="modal" data-bs-target="#modalPedido" data-nome="Coquinho" data-preco="R$ 35,00"><i class="bi bi-plus-circle me-1"></i> Selecionar e Personalizar</button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="card h-100 shadow-sm border-0 cuia-card">
+                    <div class="cuia-img-container"><img src="assets/img/propria_cuia.png" alt="Serviço de gravação em cuia própria" loading="lazy"></div>
+                    <div class="card-body d-flex flex-column text-center">
+                        <h5 class="card-title fw-bold">Trazer minha própria cuia</h5>
+                        <p class="card-text flex-grow-1 text-muted small">Solicite apenas o serviço de gravação a laser na sua cuia.</p>
+                        <p class="fw-bold text-primary mb-3 fs-5">Sob consulta</p>
+                        <button class="btn btn-dark w-100 select-cuia" data-bs-toggle="modal" data-bs-target="#modalPedido" data-nome="Trazer minha própria cuia" data-preco="Sob consulta"><i class="bi bi-plus-circle me-1"></i> Selecionar e Personalizar</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 </main>
@@ -155,7 +147,7 @@ $cuias = [
                 </h5>
                 <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="processar.php" method="POST" enctype="multipart/form-data" id="formPedido">
+            <form id="formPedido">
                 <div class="modal-body">
                     <!-- Alerta de erro -->
                     <div class="alert alert-danger d-none" id="formError"></div>
@@ -164,7 +156,7 @@ $cuias = [
                     <div class="mb-3">
                         <label class="form-label fw-bold"><i class="bi bi-box me-1"></i> Item Escolhido:</label>
                         <input type="text" class="form-control bg-light fw-bold" id="cuia_selecionada_nome" readonly>
-                        <input type="hidden" name="cuia_id" id="cuia_id" required>
+                        <input type="hidden" name="cuia_preco" id="cuia_preco">
                     </div>
 
                     <!-- Nome -->
@@ -186,7 +178,7 @@ $cuias = [
                     <div class="mb-3">
                         <label for="imagem_referencia" class="form-label"><i class="bi bi-image me-1"></i> Imagem da Arte (Logo, Nome, Desenho)</label>
                         <input type="file" class="form-control" name="imagem_referencia" id="imagem_referencia" accept="image/png,image/jpeg,image/webp,image/gif">
-                        <div class="form-text">Formatos aceitos: JPG, PNG, GIF, WEBP. Tamanho máximo: 5MB.</div>
+                        <div class="form-text">A imagem será conferida aqui. Depois, anexe-a na conversa do WhatsApp.</div>
                         <div id="previewContainer" class="mt-2 d-none">
                             <img id="imagePreview" class="img-fluid rounded shadow-sm" style="max-height: 150px;" alt="Preview da imagem">
                         </div>
@@ -199,15 +191,13 @@ $cuias = [
                                   placeholder="Detalhes sobre posição, tamanho, nomes extras, etc."></textarea>
                     </div>
 
-                    <!-- CSRF Token -->
-                    <input type="hidden" name="csrf_token" id="csrf_token" value="">
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
                         <i class="bi bi-x me-1"></i> Cancelar
                     </button>
                     <button type="submit" class="btn btn-primary" id="btnEnviar">
-                        <span class="btn-text"><i class="bi bi-send me-1"></i> Enviar Pedido</span>
+                        <span class="btn-text"><i class="bi bi-whatsapp me-1"></i> Continuar no WhatsApp</span>
                         <span class="btn-loading d-none">
                             <span class="spinner-border spinner-border-sm me-1" role="status"></span>
                             Enviando...
@@ -223,7 +213,7 @@ $cuias = [
 <footer class="bg-dark text-white py-4 mt-5">
     <div class="container text-center">
         <img src="assets/img/logo.png" alt="C2F Logo" height="40" class="mb-3 logo-footer">
-        <p class="mb-0">&copy; <?php echo date('Y'); ?> C2F Maker - Todos os direitos reservados.</p>
+        <p class="mb-0">&copy; <span id="anoAtual"></span> C2F Maker - Todos os direitos reservados.</p>
         <small class="text-muted">Engenharia Elétrica & Personalização 3D/Laser</small>
     </div>
 </footer>
@@ -231,12 +221,8 @@ $cuias = [
 <!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-// ============ Geração de CSRF Token ============
-function generateCSRFToken() {
-    const array = new Uint8Array(32);
-    crypto.getRandomValues(array);
-    return Array.from(array).map(b => b.toString(16).padStart(2, '0')).join('');
-}
+// Troque somente este número quando o WhatsApp da empresa mudar.
+const WHATSAPP_C2F = '5555999827869';
 
 // ============ Máscara de Telefone ============
 const whatsappInput = document.getElementById('whatsapp');
@@ -295,16 +281,15 @@ const formPedido = document.getElementById('formPedido');
 const btnEnviar = document.getElementById('btnEnviar');
 const formError = document.getElementById('formError');
 
-// Gerar token CSRF ao carregar
-document.getElementById('csrf_token').value = generateCSRFToken();
+document.getElementById('anoAtual').textContent = new Date().getFullYear();
 
 modalPedido.addEventListener('show.bs.modal', function(event) {
     const button = event.relatedTarget;
-    const id = button.getAttribute('data-id');
     const nome = button.getAttribute('data-nome');
+    const preco = button.getAttribute('data-preco');
     
-    document.getElementById('cuia_id').value = id;
     document.getElementById('cuia_selecionada_nome').value = nome;
+    document.getElementById('cuia_preco').value = preco;
     
     // Limpar erro anterior
     formError.classList.add('d-none');
@@ -318,6 +303,7 @@ modalPedido.addEventListener('show.bs.modal', function(event) {
 
 // ============ Validação do Formulário ============
 formPedido.addEventListener('submit', function(e) {
+    e.preventDefault();
     formError.classList.add('d-none');
     
     const nome = document.getElementById('nome').value.trim();
@@ -332,21 +318,20 @@ formPedido.addEventListener('submit', function(e) {
     if (whatsapp.replace(/\D/g, '').length < 10) {
         errors.push('Informe um número de WhatsApp válido.');
     }
-    if (!imagem) {
-        errors.push('Envie a imagem da arte que deseja gravar.');
-    }
-    
     if (errors.length > 0) {
-        e.preventDefault();
         formError.innerHTML = '<strong>Corrija os seguintes erros:</strong><ul class="mb-0 mt-1">';
         errors.forEach(err => formError.innerHTML += '<li>' + err + '</li>');
         formError.innerHTML += '</ul>';
         formError.classList.remove('d-none');
     } else {
-        // Mostrar loading no botão
-        btnEnviar.disabled = true;
-        btnEnviar.querySelector('.btn-text').classList.add('d-none');
-        btnEnviar.querySelector('.btn-loading').classList.remove('d-none');
+        const produto = document.getElementById('cuia_selecionada_nome').value;
+        const preco = document.getElementById('cuia_preco').value;
+        const observacoes = document.getElementById('observacoes').value.trim() || 'Nenhuma';
+        const avisoImagem = imagem
+            ? `\n🖼️ Separei a imagem "${imagem.name}" e vou anexá-la nesta conversa.`
+            : '\n🖼️ Ainda não selecionei uma imagem de referência.';
+        const mensagem = `Olá! Gostaria de solicitar uma gravação na C2F Maker.\n\n👤 Nome: ${nome}\n📱 Meu WhatsApp: ${whatsapp}\n🧉 Item: ${produto}\n💰 Valor informado: ${preco}\n📝 Observações: ${observacoes}${avisoImagem}`;
+        window.open(`https://wa.me/${WHATSAPP_C2F}?text=${encodeURIComponent(mensagem)}`, '_blank', 'noopener,noreferrer');
     }
 });
 

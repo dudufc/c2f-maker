@@ -23,7 +23,7 @@ const PRODUTOS_C2F = [
         nome: 'Cuia Coquinho Tradicional',
         descricao: 'Modelo coquinho com acabamento tradicional.',
         preco: 'R$ 59,90',
-        imagem: 'assets/img/cuia-coquinho-tradicional.jpg'
+        imagem: 'assets/img/cuia-bago-touro.jpg'
     },
     {
         nome: 'Cuia Coquinho com bocal de inox',
@@ -53,7 +53,7 @@ const PRODUTOS_C2F = [
         nome: 'Cuia Bago de Touro',
         descricao: 'Modelo Bago de Touro tradicional.',
         preco: 'R$ 59,90',
-        imagem: 'assets/img/cuia-bago-touro.jpg'
+        imagem: 'assets/img/cuia-coquinho-tradicional.jpg'
     },
     {
         nome: 'Cuia Bago de Touro com bocal de inox',

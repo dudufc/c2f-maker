@@ -170,7 +170,7 @@
 <script src="assets/js/products.js"></script>
 <script>
 // Troque somente este número quando o WhatsApp da empresa mudar.
-const WHATSAPP_C2F = '5555996947376';
+const WHATSAPP_C2F = '5555999827869';
 const SUPABASE_URL = 'https://klhmcxoylpdyvjmdmygm.supabase.co';
 const SUPABASE_PUBLISHABLE_KEY = 'sb_publishable_eW82uQ4aIb-4piI2NNHbiA_YEX32jra';
 const SUPABASE_BUCKET = 'artes-pedidos';
@@ -182,7 +182,8 @@ PRODUTOS_C2F.forEach(produto => {
     coluna.className = 'col-md-6 col-lg-3';
     const imagemProduto = produto.imagem
         ? `<div class="cuia-img-container">
-               <img src="${produto.imagem}" alt="${produto.nome}" loading="lazy">
+               <img src="${produto.imagem}" alt="${produto.nome}" loading="lazy"
+                    class="${produto.imagem.endsWith('.jpg') ? 'foto-vertical' : ''}">
            </div>`
         : '';
     coluna.innerHTML = `
@@ -205,16 +206,27 @@ PRODUTOS_C2F.forEach(produto => {
 // ============ Máscara de Telefone ============
 const whatsappInput = document.getElementById('whatsapp');
 whatsappInput.addEventListener('input', function(e) {
-    let value = e.target.value.replace(/\D/g, '');
-    if (value.length > 11) value = value.slice(0, 11);
-    
-    if (value.length > 0) {
-        value = '(' + value;
-        if (value.length > 3) value = value.slice(0, 3) + ') ' + value.slice(3);
-        if (value.length > 9) value = value.slice(0, 9) + ' ' + value.slice(9);
-        if (value.length > 14) value = value.slice(0, 14) + '-' + value.slice(14);
+    const numeros = e.target.value.replace(/\D/g, '').slice(0, 11);
+
+    if (numeros.length === 0) {
+        e.target.value = '';
+        return;
     }
-    e.target.value = value;
+
+    const ddd = numeros.slice(0, 2);
+    const telefone = numeros.slice(2);
+    let formatado = `(${ddd}`;
+
+    if (numeros.length >= 2) formatado += ') ';
+
+    if (telefone.length <= 4) {
+        formatado += telefone;
+    } else {
+        const tamanhoPrefixo = telefone.length === 9 ? 5 : telefone.length - 4;
+        formatado += `${telefone.slice(0, tamanhoPrefixo)}-${telefone.slice(tamanhoPrefixo)}`;
+    }
+
+    e.target.value = formatado;
 });
 
 // ============ Preview de Imagem ============

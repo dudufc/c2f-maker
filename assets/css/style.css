@@ -67,30 +67,14 @@ body {
     overflow: hidden;
 }
 
+.produto-sem-foto .card-body {
+    min-height: 250px;
+    padding: 1.5rem;
+}
+
 .cuia-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
-}
-
-.cuia-img-container {
-    height: 200px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-    border-bottom: 1px solid #dee2e6;
-}
-
-.cuia-img-container img {
-    max-height: 100%;
-    max-width: 100%;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-}
-
-.cuia-card:hover .cuia-img-container img {
-    transform: scale(1.05);
 }
 
 /* --- Botões --- */
@@ -183,10 +167,6 @@ footer {
     
     .hero-section .lead {
         font-size: 1rem;
-    }
-    
-    .cuia-img-container {
-        height: 180px;
     }
     
     .modal-dialog {

@@ -88,12 +88,14 @@ const PRODUTOS_C2F = [
         nome: 'Seca-cuia',
         descricao: 'Suporte para deixar a cuia secar corretamente após o uso.',
         preco: 'R$ 25,00',
-        imagem: 'assets/img/seca-cuia.png'
+        imagem: 'assets/img/seca-cuia.png',
+        permiteImagemReferencia: false
     },
     {
         nome: 'Fecha-pacotes',
         descricao: 'Acessório prático para manter embalagens bem fechadas.',
         preco: 'R$ 25,00',
-        imagem: 'assets/img/fecha-pacotes.png'
+        imagem: 'assets/img/fecha-pacotes.png',
+        permiteImagemReferencia: false
     }
 ];

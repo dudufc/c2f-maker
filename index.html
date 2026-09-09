@@ -122,7 +122,7 @@
                     </div>
 
                     <!-- Upload de imagem -->
-                    <div class="mb-3">
+                    <div class="mb-3" id="campoImagemReferencia">
                         <label for="imagem_referencia" class="form-label"><i class="bi bi-image me-1"></i> Imagem da Arte (Logo, Nome, Desenho)</label>
                         <input type="file" class="form-control" name="imagem_referencia" id="imagem_referencia" accept="image/png,image/jpeg,image/webp,image/gif">
                         <div class="form-text">A imagem será enviada e o link seguirá automaticamente no pedido.</div>
@@ -195,7 +195,8 @@ PRODUTOS_C2F.forEach(produto => {
                 <p class="fw-bold text-primary mb-3 fs-5">${produto.preco}</p>
                 <button class="btn btn-dark w-100 select-cuia" data-bs-toggle="modal"
                         data-bs-target="#modalPedido" data-nome="${produto.nome}"
-                        data-preco="${produto.preco}">
+                        data-preco="${produto.preco}"
+                        data-permite-imagem="${produto.permiteImagemReferencia !== false}">
                     <i class="bi bi-plus-circle me-1"></i> Selecionar
                 </button>
             </div>
@@ -233,6 +234,7 @@ whatsappInput.addEventListener('input', function(e) {
 const imagemInput = document.getElementById('imagem_referencia');
 const previewContainer = document.getElementById('previewContainer');
 const imagePreview = document.getElementById('imagePreview');
+const campoImagemReferencia = document.getElementById('campoImagemReferencia');
 
 imagemInput.addEventListener('change', function(e) {
     const file = e.target.files[0];
@@ -277,6 +279,7 @@ modalPedido.addEventListener('show.bs.modal', function(event) {
     const button = event.relatedTarget;
     const nome = button.getAttribute('data-nome');
     const preco = button.getAttribute('data-preco');
+    const permiteImagem = button.getAttribute('data-permite-imagem') === 'true';
     
     document.getElementById('cuia_selecionada_nome').value = nome;
     document.getElementById('cuia_preco').value = preco;
@@ -289,6 +292,7 @@ modalPedido.addEventListener('show.bs.modal', function(event) {
     document.getElementById('observacoes').value = '';
     document.getElementById('imagem_referencia').value = '';
     previewContainer.classList.add('d-none');
+    campoImagemReferencia.classList.toggle('d-none', !permiteImagem);
 });
 
 // ============ Validação do Formulário ============
@@ -350,9 +354,10 @@ formPedido.addEventListener('submit', async function(e) {
             const preco = document.getElementById('cuia_preco').value;
             const observacoes = document.getElementById('observacoes').value.trim() || 'Nenhuma';
             const imagemUrl = imagem ? await enviarImagem(imagem) : '';
-            const referencia = imagemUrl
-                ? `\nImagem de referência: ${imagemUrl}`
-                : '\nImagem de referência: não enviada.';
+            const permiteImagem = !campoImagemReferencia.classList.contains('d-none');
+            const referencia = permiteImagem
+                ? (imagemUrl ? `\nImagem de referência: ${imagemUrl}` : '\nImagem de referência: não enviada.')
+                : '';
             const mensagem = `Olá! Gostaria de solicitar uma gravação na C2F Maker.\n\nNome: ${nome}\nMeu WhatsApp: ${whatsapp}\nItem: ${produto}\nValor informado: ${preco}\nObservações: ${observacoes}${referencia}`;
             window.location.href = `https://wa.me/${WHATSAPP_C2F}?text=${encodeURIComponent(mensagem)}`;
         } catch (erro) {

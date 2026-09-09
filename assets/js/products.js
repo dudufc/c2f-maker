@@ -82,7 +82,8 @@ const PRODUTOS_C2F = [
     {
         nome: 'Orçamento 3D',
         descricao: 'Envie sua ideia ou imagem para solicitar um orçamento personalizado.',
-        preco: 'A definir'
+        preco: 'A definir',
+        imagem: 'assets/img/orcamento-3d.jpg'
     },
     {
         nome: 'Seca-cuia',
